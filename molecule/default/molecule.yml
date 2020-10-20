@@ -12,6 +12,9 @@ platforms:
   - name: instance
     image: "jj0cker/docker-${MOLECULE_DISTRIBUTION:-centos7}-ansible:latest"
     command: ""
+    tmpfs:
+      - /run
+      - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true

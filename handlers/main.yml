@@ -1,2 +1,5 @@
 ---
 # handlers file for jj0cker.firewalld
+- name: "Reload firewalld"
+  command: firewall-cmd --reload
+  become: true

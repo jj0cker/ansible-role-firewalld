@@ -1,2 +1,20 @@
 ---
 # defaults file for jj0cker.firewalld
+# The default zone for centos7 is 'public'.
+firewalld_default_zone: public
+
+# firewalld_custom_services:
+#   - name: ourSSH1
+#     description: ourSSH1
+#     port: 8123
+#     proto: tcp
+#   - name: ourSSH2
+#     description: ourSSH2
+#     port: 8124
+#     proto: tcp
+
+# This is default allowed service for centos7
+# firewalld_allowed_services:
+#   - ssh
+#   - dhcpv6-client
+firewalld_allowed_services: []

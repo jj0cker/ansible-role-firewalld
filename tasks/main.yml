@@ -1,2 +1,39 @@
 ---
 # tasks file for jj0cker.firewalld
+- name: Install firewalld
+  yum:
+    name: firewalld
+    state: present
+  become: true
+
+- name: Start firewalld
+  service:
+    name: firewalld
+    state: started
+    enabled: true
+  become: true
+
+- name: Create custom service file
+  template:
+    src: service.xml.j2
+    dest: /etc/firewalld/services/{{ item.name }}.xml
+    owner: root
+    group: root
+    mode: "0644"
+  loop: "{{ firewalld_custom_services }}"
+  when: firewalld_custom_services is defined
+  become: true
+  notify: "Reload firewalld"
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Allowed services for {{ firewalld_default_zone }} zone
+  firewalld:
+    state: enabled
+    zone: "{{ firewalld_default_zone }}"
+    service: "{{ item }}"
+    immediate: true
+    permanent: true
+  loop: "{{ firewalld_allowed_services }}"
+  become: true
