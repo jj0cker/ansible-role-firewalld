@@ -3,7 +3,18 @@
 
 - name: Verify
   hosts: all
-  tasks:
-  - name: Example assertion
-    assert:
-      that: true
+  vars:
+    firewalld_custom_services:
+      - name: ourSSH1
+        description: ourSSH1
+        port: 8123
+        proto: tcp
+      - name: ourSSH2
+        description: ourSSH2
+        port: 8124
+        proto: tcp
+    firewalld_allowed_services:
+      - ourSSH1
+      - ourSSH2
+  roles:
+    - role: jj0cker.firewalld
