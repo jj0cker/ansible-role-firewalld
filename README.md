@@ -1,7 +1,7 @@
 Role Name: jj0cker.firewalld
 =======================================
 
-A brief description of the role goes here.
+This role install and start firewalld on Red Hat like distribution. You can specify what services allow, create your own services. 
 
 Requirements
 ------------
